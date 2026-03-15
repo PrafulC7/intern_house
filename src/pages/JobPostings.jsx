@@ -42,10 +42,15 @@ const deleteJob = async (jobId) => {
     const value = e.target.value;
     setSearch(value);
 
-    if (value.length > 0) {
-      navigate(`/jobs?search=${value}`);
-    }
+    // if (value.length > 0) {
+    //   navigate(`/jobs?search=${value}`);
+    // }
   };
+
+  const filteredJobs = jobsData.filter((job) =>
+  job.jobTitle.toLowerCase().includes(search.toLowerCase()) ||
+  job.companyName.toLowerCase().includes(search.toLowerCase())
+);
   if (loading) return <h3>Loading...</h3>;
   return (
     <div className=" container my-2">
@@ -54,14 +59,14 @@ const deleteJob = async (jobId) => {
                 <input
                   className="form-control"
                   type="search"
-                  placeholder="Search books"
+                  placeholder="Search by job title or company name"
                   value={search}
                   onChange={handleSearch}
                 />
               </form> 
               <h2>All Jobs</h2>
               <div className="d-flex row">
-              {jobsData.map((job) => (
+              {filteredJobs.map((job) => (
          <div key={job._id} className="col-sm-12 col-md-5 col-lg-4">
             <div className="card p-3 mb-4">
   <div className="card-body">
