@@ -11,7 +11,7 @@ const JobPostings = () => {
 useEffect(() => {
   const fetchJobs = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/jobs");
+      const response = await axios.get("https://internhouse-backend.vercel.app/jobs");
       setJobsData(response.data);
     } catch (error) {
       console.error("Error fetching jobs:", error);
